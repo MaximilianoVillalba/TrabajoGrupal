@@ -1,8 +1,5 @@
 <?php
-require('./conexion.php');
 include('./head.php');
-
-$montanias = $mysqli->query("SELECT * FROM montania");
 ?>
 
 <body>

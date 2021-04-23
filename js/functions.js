@@ -145,23 +145,37 @@ $("#formularioUsuario").submit((e) => {
     console.log('asdasd');
 });
 
+/* Ejercicio paginacion */
+
 $(".boton-paginacion").click((e) => {
-    paginaDestino = e.target.id;
-    paginaPresente = e.target.value;
+    paginaDestino = e.target.id; //Para saber que boton clickeo (ANT) O (SIG)
+    paginaPresente = e.target.value; //Para saber en que pagina se encuentra
+
     if (paginaDestino == "sig") {
-        pagina = parseInt(paginaPresente) + 4;
+        paginaNueva = parseInt(paginaPresente) + 1;
     } else {
-        pagina = parseInt(paginaPresente) - 4;
+        paginaNueva = parseInt(paginaPresente) - 1;
     }
+    paginacion = (parseInt(paginaNueva) - 1) * 5;
     $.ajax({
         url: "./pagina_listado.php",
         type: "POST",
-        data: { pagina },
+        data: { paginacion },
         success: (resp) => {
-            $("#tbody-pagina").html(resp);
-            pagina = parseInt(pagina);
-            $(".boton-izq").attr("id", parseInt($(".boton-izq").attr("id")) + 1);
-            $(".boton-der").attr("id", parseInt($(".boton-der").attr("id")) + 1);
+            $("#tbody-pagina").empty();
+            users = JSON.parse(resp);
+            users.forEach(user => {
+                let html = '<tr>\
+                <td>'+ user.nombre_usuario + '</td>\
+                <td>'+ user.empresa + '</td>\
+                <td>'+ user.telefono + '</td>\
+                <td>'+ user.email + '</td>\
+                <td>'+ user.comentario + '</td>\
+                </tr>'
+                $("#tbody-pagina").append(html);
+            })
+            $(".boton-izq").attr("value", paginaNueva);
+            $(".boton-der").attr("value", paginaNueva);
         },
         error: () => {
 
