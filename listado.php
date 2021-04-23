@@ -16,7 +16,15 @@ include('./head.php');
                     </tr>
                 </thead>
                 <tbody id="tbody-pagina">
-
+                    <!--                     <?php while ($rowListado = $listado->fetch_assoc()) { ?>
+                    <tr>
+                        <td><?php echo $rowListado['nombre_usuario'] ?></td>
+                        <td><?php echo $rowListado['empresa'] ?></td>
+                        <td><?php echo $rowListado['telefono'] ?></td>
+                        <td><?php echo $rowListado['email'] ?></td>
+                        <td><?php echo $rowListado['comentario'] ?></td>
+                    </tr>
+                    <?php } ?> -->
                 </tbody>
             </table>
             <div class="d-md-block col-3 mx-auto">

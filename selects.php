@@ -1,5 +1,8 @@
 <?php
 include('./head.php');
+require('./conexion.php');
+
+$provinces = $mysqli->query("SELECT * FROM provincia");
 ?>
 
 <body>
@@ -11,6 +14,10 @@ include('./head.php');
             <div class="col-12 col-md-6">
                 <select class="form-select" id="select_province">
                     <option selected disabled>Provincia</option>
+                    <?php while ($rowProvinces = $provinces->fetch_assoc()) { ?>
+                    <option value="<?php echo $rowProvinces['id_provincia'] ?>"><?php echo $rowProvinces['nombre'] ?>
+                    </option>
+                    <?php } ?>
                 </select>
             </div>
             <div class="col-12 col-md-6">
