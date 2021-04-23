@@ -28,7 +28,7 @@
             <div class="col-2">
                 <img id="img-logo" src="img/hiking.png" alt="Trekking">
             </div>
-            <div class="col-5 offset-2">
+            <div class="col-5 offset-2 centrado">
                 <h1>
                     <strong>Trekking</strong>
                     <small class="text-muted">excursionismo en la patagonia</small>
