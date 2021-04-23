@@ -4,10 +4,12 @@ html {
 }
 
 body {
-  height: 100%;
   margin: 0;
   padding: 0;
   font-family: 'Advent Pro', sans-serif;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 }
 
 /* INDEX */
@@ -66,13 +68,14 @@ body {
 
 #footer-div {
   height: 70px;
-  position: relative;
+  position: fixed;
   bottom: 0;
   width: 100%;
   background-color: rgb(55, 55, 55);
   color: blanchedalmond;
   font-family: 'Advent Pro', sans-serif;
   font-size: medium;
+  margin-top:auto;
 }
 
 #creditIcon {
@@ -80,6 +83,7 @@ body {
   position: absolute;
   bottom: 0;
 }
+
 
 /* ------------------------------------------------------------- */
 
@@ -164,10 +168,18 @@ body {
 
 .img-lista {
   filter: sepia();
+  height: 100%;
+  width: 100%;
 }
 
-#img-container {
+.img-container {
   overflow: hidden;
+}
+
+.lista-cerros:hover {
+  cursor: default;
+  font-weight: bold;
+  transition:all .1s ease-in-out;
 }
 
 .img-lista:hover {
