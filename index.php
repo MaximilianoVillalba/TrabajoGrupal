@@ -7,7 +7,7 @@
             <img class="img_index" src="./img/trekking_index-prueba.jpg" alt="">
             <div class="row row-index">
                 <div class="col-12 primer-div-index">
-                    <p>El trekking o excursionismo es una actividad física que consiste en caminar por escenarios
+                    <p>El trekkinggg o excursionismo es una actividad física que consiste en caminar por escenarios
                         naturales, como montañas, bosques, selvas, cañones o ríos. Se diferencia del senderismo en que
                         la modalidad del trekking requiere un mayor esfuerzo físico, ya que mientras el recorrido
                         realizado en senderismo suele tener un grado de dificultad más bajo, debido a que sus rutas

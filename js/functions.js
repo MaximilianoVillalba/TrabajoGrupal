@@ -1,3 +1,52 @@
+/* SELECTS */
+$(function () {
+    $.ajax({
+        url: './get_provincias.php',
+        type: 'POST',
+        success: (resp) => {
+            info = JSON.parse(resp);
+            info.forEach(element => {
+                $("#select_province").append('<option value=' + element.id_provincia + '>' + element.nombre + '</option>');
+            });
+        },
+        error: () => {
+            console.log('errrr');
+        }
+    })
+
+    $.ajax({
+        url: './get_tabs.php',
+        type: 'POST',
+        success: (resp) => {
+            tabs = JSON.parse(resp);
+            tabs.forEach(element => {
+                $("#tabs-dinamicos").append('<li class="nav-item"><button class="nav-link" id="' +
+                    element.id + '" data-bs-toggle="pill" data-bs-target="#pills-' +
+                    element.id + '" type="button" role="tab" aria-selected="true"> ' + element.nombre + '</button></li>');
+            })
+        }
+    })
+
+    $.ajax({
+        url: "./pagina_listado.php",
+        type: "POST",
+        data: { paginacion: 0 },
+        success: (resp) => {
+            users = JSON.parse(resp);
+            users.forEach(user => {
+                let html = '<tr>\
+                <td>'+ user.nombre_usuario + '</td>\
+                <td>'+ user.empresa + '</td>\
+                <td>'+ user.telefono + '</td>\
+                <td>'+ user.email + '</td>\
+                <td>'+ user.comentario + '</td>\
+                </tr>';
+                $("#tbody-pagina").append(html);
+            })
+        }
+    })
+});
+
 $("#select_province").change(function () {
     valor = $("#select_province option:selected").val();
     $.ajax({
@@ -28,9 +77,12 @@ $("#select_montania").change(function () {
     })
 });
 
+/* TABS */
 $(".nav-link").click(function (e) {
+    console.log('adasdsad');
     idSeleccionado = e.target.id;
-    $.ajax({
+    console.log(idSeleccionado);
+    /* $.ajax({
         url: './info_tab.php',
         type: 'POST',
         data: { idSeleccionado },
@@ -40,8 +92,13 @@ $(".nav-link").click(function (e) {
         error: function () {
             console.log('errror');
         }
-    })
+    }) */
 });
+
+
+/* $(function () {
+
+}) */
 
 $(".list-li-desc li").click(function (e) {
     idSeleccionado = e.target.id;
@@ -79,23 +136,37 @@ $("#formularioUsuario").submit((e) => {
     console.log('asdasd');
 });
 
+/* Ejercicio paginacion */
+
 $(".boton-paginacion").click((e) => {
-    paginaDestino = e.target.id;
-    paginaPresente = e.target.value;
+    paginaDestino = e.target.id; //Para saber que boton clickeo (ANT) O (SIG)
+    paginaPresente = e.target.value; //Para saber en que pagina se encuentra
+
     if (paginaDestino == "sig") {
-        pagina = parseInt(paginaPresente) + 4;
+        paginaNueva = parseInt(paginaPresente) + 1;
     } else {
-        pagina = parseInt(paginaPresente) - 4;
+        paginaNueva = parseInt(paginaPresente) - 1;
     }
+    paginacion = (parseInt(paginaNueva) - 1) * 5;
     $.ajax({
         url: "./pagina_listado.php",
         type: "POST",
-        data: { pagina },
+        data: { paginacion },
         success: (resp) => {
-            $("#tbody-pagina").html(resp);
-            pagina = parseInt(pagina);
-            $(".boton-izq").attr("id", parseInt($(".boton-izq").attr("id")) + 1);
-            $(".boton-der").attr("id", parseInt($(".boton-der").attr("id")) + 1);
+            $("#tbody-pagina").empty();
+            users = JSON.parse(resp);
+            users.forEach(user => {
+                let html = '<tr>\
+                <td>'+ user.nombre_usuario + '</td>\
+                <td>'+ user.empresa + '</td>\
+                <td>'+ user.telefono + '</td>\
+                <td>'+ user.email + '</td>\
+                <td>'+ user.comentario + '</td>\
+                </tr>'
+                $("#tbody-pagina").append(html);
+            })
+            $(".boton-izq").attr("value", paginaNueva);
+            $(".boton-der").attr("value", paginaNueva);
         },
         error: () => {
 
