@@ -1,7 +1,7 @@
 <?php include('./head.php') ?>
 
 <body>
-    <div class="container-fluid d-flex justify-content-center align-items-center">
+    <div id="main" class="container-fluid d-flex justify-content-center align-items-center">
         <div class="col-md-12">
             <!-- <h1 class="text-center">Trekking</h1> -->
             <img class="img_index" src="./img/trekking_index-prueba.jpg" alt="Imagen bienvenida">

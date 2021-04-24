@@ -3,7 +3,7 @@ include('./head.php');
 ?>
 
 <body>
-    <div class="container-fluid">
+    <div class="container-fluid main">
         <div class="row color-head justify-content-center text-center">
             <h2>Trekking</h2>
         </div>
