@@ -3,10 +3,6 @@ require('./conexion.php');
 
 $usuario = $_POST['valor'];
 
-$validacion = $mysqli->query("SELECT email FROM usuario WHERE nombre_usuario='$usuario'");
-
-if ($validacion->num_rows == 1) {
-    echo "existe uno igual";
-} else {
-    echo "no existe uno igual";
-}
+$validacion = $mysqli->query("SELECT COUNT(nombre_usuario) FROM usuario WHERE nombre_usuario='$usuario'");
+$num = $validacion->fetch_row();
+print_r($num[0]);
