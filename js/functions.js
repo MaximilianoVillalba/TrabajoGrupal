@@ -25,6 +25,26 @@ $(function () {
                     element.id + '" type="button" role="tab" aria-selected="true"> ' + element.nombre + '</button></li>');
             })
         }
+    }).then(() => {
+        $(".nav-link").click(function (e) {
+            /* Para que no se agregue la clave active cada vez que se clickea */
+            $(".nav-link").removeClass("active");
+            /* Para sacar el border al que este seleccionado */
+            $(".nav-link").removeClass("border");
+            idSeleccionado = e.target.id;
+            $("#" + idSeleccionado).addClass("border");
+            $.ajax({
+                url: './info_tab.php',
+                type: 'POST',
+                data: { idSeleccionado },
+                success: function (resp) {
+                    $("#contenido-tab").html(resp);
+                },
+                error: function () {
+                    console.log('errror');
+                }
+            })
+        });
     })
 
     $.ajax({
@@ -44,6 +64,34 @@ $(function () {
                 $("#tbody-pagina").append(html);
             })
         }
+    })
+
+    $.ajax({
+        url: "./get_tabs.php",
+        success: (resp) => {
+            montanias = JSON.parse(resp);
+            montanias.forEach((elem) => {
+                $(".list-li-desc").append('<li id="' + elem.id + '">' + elem.nombre + '</li>');
+            })
+        }
+    }).then(() => {
+        $(".list-li-desc li").click(function (e) {
+            idSeleccionado = e.target.id;
+            $.ajax({
+                url: './info_modal.php',
+                type: 'POST',
+                data: { idSeleccionado },
+                success: function (resp) {
+                    montania = JSON.parse(resp);
+                    $("#modal-title").text(montania[0].nombre);
+                    $("#modal-description").text(montania[0].descripcion);
+                    $("#modal-desc").modal('show');
+                },
+                error: function () {
+
+                }
+            })
+        })
     })
 });
 
@@ -76,40 +124,6 @@ $("#select_montania").change(function () {
         }
     })
 });
-
-/* TABS */
-$(".nav-link").click(function (e) {
-    console.log('adasdsad');
-    idSeleccionado = e.target.id;
-    console.log(idSeleccionado);
-    /* $.ajax({
-        url: './info_tab.php',
-        type: 'POST',
-        data: { idSeleccionado },
-        success: function (resp) {
-            $("#contenido-tab").html(resp);
-        },
-        error: function () {
-            console.log('errror');
-        }
-    }) */
-});
-
-$(".list-li-desc li").click(function (e) {
-    idSeleccionado = e.target.id;
-    $.ajax({
-        url: './info_modal.php',
-        type: 'POST',
-        data: { idSeleccionado },
-        success: function (resp) {
-            console.log(resp);
-            $("#modal-desc").html(resp);
-        },
-        error: function () {
-
-        }
-    })
-})
 
 $("#input-user").change((e) => {
     valor = $("#input-user").val();

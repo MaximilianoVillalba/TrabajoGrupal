@@ -1,8 +1,5 @@
 <?php
-require('./conexion.php');
 include('./head.php');
-
-$opciones = $mysqli->query("SELECT * FROM montania");
 ?>
 
 <body>
@@ -39,13 +36,26 @@ $opciones = $mysqli->query("SELECT * FROM montania");
             <div class="row primer-row">
                 <div class="col-sm-4 col-md-6 centrado">
                     <ol class="list-li-desc">
-                        <?php $i = 1;
-                        while ($rowOpciones = $opciones->fetch_assoc()) { ?>
-                        <li id="<?php echo $rowOpciones['id'] ?>"><?php echo $rowOpciones['nombre'] ?></li>
-                        <?php $i++;
-                        } ?>
                     </ol>
-                    <div id="modal-desc">
+                    <div>
+                        <div class="modal" tabindex="-1" id="modal-desc">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="modal-title">Modal title</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                            aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body" id="modal-description">
+                                        <p>Modal body text goes here.</p>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary"
+                                            data-bs-dismiss="modal">Close</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="col-sm-8 col-md-6 d-flex justify-content-center align-items-center">
