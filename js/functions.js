@@ -20,9 +20,12 @@ $(function () {
         success: (resp) => {
             tabs = JSON.parse(resp);
             tabs.forEach(element => {
-                $("#tabs-dinamicos").append('<button class"test" id="' +
-                    element.id + '"> ' + element.nombre + '</button>');
+                $("#tabs-dinamicos").append('<li class="nav-item"><button class="nav-link" id="' +
+                    element.id + '" data-bs-toggle="pill" data-bs-target="#pills-' +
+                    element.id + '" type="button" role="tab" aria-selected="true"> ' + element.nombre + '</button></li>');
             })
+            $('#1').addClass('border');
+            getContenido(1);
         }
     }).then(() => {
         $(".nav-link").click(function (e) {
@@ -32,19 +35,23 @@ $(function () {
             $(".nav-link").removeClass("border");
             idSeleccionado = e.target.id;
             $("#" + idSeleccionado).addClass("border");
-            $.ajax({
-                url: './info_tab.php',
-                type: 'POST',
-                data: { idSeleccionado },
-                success: function (resp) {
-                    $("#contenido-tab").html(resp);
-                },
-                error: function () {
-                    console.log('errror');
-                }
-            })
+            getContenido(idSeleccionado);
         });
     })
+
+    function getContenido(idSeleccionado) {
+        $.ajax({
+            url: './info_tab.php',
+            type: 'POST',
+            data: { idSeleccionado },
+            success: function (resp) {
+                $("#contenido-tab").html(resp);
+            },
+            error: function () {
+                console.log('errror');
+            }
+        })
+    }
 
     $.ajax({
         url: "./pagina_listado.php",

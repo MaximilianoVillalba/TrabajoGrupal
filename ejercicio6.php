@@ -18,10 +18,10 @@ include('./head.php');
                 </div>
             </div>
             <div class="row">
-                <div class="col col-lg-3 img-container centrado">
+                <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 img-container centrado">
                     <img class="img-lista img-fluid" src="./img/trekking_chalten1.jpg" alt="">
                 </div>
-                <div class="col col-lg-3 img-container centrado">
+                <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 img-container centrado">
                     <img class="img-lista img-fluid" src="./img/trekking_chalten2.jpg" alt="">
                 </div>
                 <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 img-container centrado">
