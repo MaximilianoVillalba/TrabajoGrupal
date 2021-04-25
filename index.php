@@ -1,13 +1,13 @@
 <?php include('./head.php') ?>
 
 <body>
-    <div class="container-fluid d-flex justify-content-center align-items-center">
+    <main class="container-fluid d-flex justify-content-center align-items-center main-margin">
         <div class="col-md-12">
-            <h1 class="text-center">Trekking</h1>
-            <img class="img_index" src="./img/trekking_index-prueba.jpg" alt="">
+            <!-- <h1 class="text-center">Trekking</h1> -->
+            <img class="img_index" src="./img/trekking_index-prueba.jpg" alt="Imagen bienvenida">
             <div class="row row-index">
                 <div class="col-12 primer-div-index">
-                    <p>El trekkinggg o excursionismo es una actividad física que consiste en caminar por escenarios
+                    <p>El trekking o excursionismo es una actividad física que consiste en caminar por escenarios
                         naturales, como montañas, bosques, selvas, cañones o ríos. Se diferencia del senderismo en que
                         la modalidad del trekking requiere un mayor esfuerzo físico, ya que mientras el recorrido
                         realizado en senderismo suele tener un grado de dificultad más bajo, debido a que sus rutas
@@ -43,6 +43,6 @@
                 </div>
             </div>
         </div>
-    </div>
+    </main>
+    <?php include('./footer.php') ?>
 </body>
-<?php include('./footer.php') ?>

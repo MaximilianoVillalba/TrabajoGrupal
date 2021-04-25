@@ -1,7 +1,7 @@
 <?php include('./head.php') ?>
 
 <body>
-    <div class="container-fluid">
+    <main class="container-fluid main-margin">
         <!-- Primer div -->
         <div class="row color-first-last justify-content-center text-center border border-5 border-white">
             <h2><em>Header</em></h2>
@@ -56,6 +56,6 @@
             class="row color-first-last d-lg-block d-md-block d-none justify-content-center border border-5 border-white text-center centrado">
             <h2><em>Footer</em></h2>
         </div>
-    </div>
+    </main>
 </body>
-<?php /* include('./footer.php') */ ?>
+<?php include('./footer.php') ?>

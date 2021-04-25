@@ -1,7 +1,7 @@
 <?php include('./head.php') ?>
 
 <body>
-    <div class="container-fluid container-ejercicio4">
+    <main class="container-fluid container-ejercicio4 main-margin">
         <div class="row header">
             <h1 class="d-flex justify-content-center"><em>HEADER</em></h1>
         </div>
@@ -24,6 +24,6 @@
                 <h1><em>Footer2</em></h1>
             </div>
         </div>
-    </div>
+</main>
 </body>
-<?php /* include('./footer.php') */ ?>
+<?php include('./footer.php') ?>

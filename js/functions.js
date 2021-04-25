@@ -1,5 +1,6 @@
 /* SELECTS */
 $(function () {
+    var imagen_placeholder = $('#img-general').attr('src');
     $.ajax({
         url: './get_provincias.php',
         type: 'POST',
@@ -24,6 +25,8 @@ $(function () {
                     element.id + '" data-bs-toggle="pill" data-bs-target="#pills-' +
                     element.id + '" type="button" role="tab" aria-selected="true"> ' + element.nombre + '</button></li>');
             })
+            $('#1').addClass('border');
+            getContenido(1);
         }
     }).then(() => {
         $(".nav-link").click(function (e) {
@@ -33,20 +36,25 @@ $(function () {
             $(".nav-link").removeClass("border");
             idSeleccionado = e.target.id;
             $("#" + idSeleccionado).addClass("border");
-            $.ajax({
-                url: './info_tab.php',
-                type: 'POST',
-                data: { idSeleccionado },
-                success: function (resp) {
-                    $("#contenido-tab").html(resp);
-                },
-                error: function () {
-                    console.log('errror');
-                }
-            })
+            getContenido(idSeleccionado);
         });
     })
 
+    function getContenido(idSeleccionado) {
+        $.ajax({
+            url: './info_tab.php',
+            type: 'POST',
+            data: { idSeleccionado },
+            success: function (resp) {
+                $("#contenido-tab").html(resp);
+            },
+            error: function () {
+                console.log('errror');
+            }
+        })
+    }
+
+    
     $.ajax({
         url: "./pagina_listado.php",
         type: "POST",
@@ -71,10 +79,31 @@ $(function () {
         success: (resp) => {
             montanias = JSON.parse(resp);
             montanias.forEach((elem) => {
-                $(".list-li-desc").append('<li id="' + elem.id + '">' + elem.nombre + '</li>');
+                $(".list-li-desc").append('<li class="lista-cerros" id="' + elem.id + '">' + elem.nombre + '</li>');
             })
         }
     }).then(() => {
+        $('.lista-cerros').mouseenter(function(){
+            idSeleccionado = this.id;
+            $.ajax({
+                url: './info_modal.php',
+                type: 'POST',
+                data: { idSeleccionado },
+                success: function (resp) {
+                    montania = JSON.parse(resp);
+                    console.log(montania[0].imagen);
+                    $("#img-general").attr('src', montania[0].imagen);
+                },
+                error: function () {
+
+                }
+            })
+        })
+
+        $('.lista-cerros').mouseleave(function () { 
+            $("#img-general").attr('src', imagen_placeholder);            
+        });
+
         $(".list-li-desc li").click(function (e) {
             idSeleccionado = e.target.id;
             $.ajax({

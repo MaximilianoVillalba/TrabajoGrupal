@@ -1,7 +1,7 @@
 <?php include('./head.php') ?>
 
 <body>
-    <div class="container-fluid d-flex justify-content-center align-items-center" id="back-formulario">
+    <main class="container d-flex justify-content-center align-items-center main-margin" id="back-formulario">
         <div class="col-md-12">
             <h1 class="text-center">Formulario de Registro</h1>
             <div id="form" class="row">
@@ -39,6 +39,6 @@
                 </form>
             </div>
         </div>
-    </div>
+    </main>
 </body>
 <?php include('./footer.php') ?>
