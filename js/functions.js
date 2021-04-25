@@ -95,11 +95,6 @@ $(".nav-link").click(function (e) {
     }) */
 });
 
-
-/* $(function () {
-
-}) */
-
 $(".list-li-desc li").click(function (e) {
     idSeleccionado = e.target.id;
     $.ajax({
@@ -173,3 +168,319 @@ $(".boton-paginacion").click((e) => {
         }
     })
 })
+
+//revisa el nombre en la base de datos
+$("#input-user").change(function () {
+    //revisa que no este vacio
+    $vacio = false;
+    $("#mensajeUser").empty();
+    if ($("#input-user").val().length < 1) {
+        $vacio = true;
+    }
+    if ($vacio) {
+        $('#mensajeUser').append('(campo obligatorio)');
+        if ($("#input-user").hasClass('form-control')) {
+            $("#input-user").removeClass('form-control');
+            $("#input-user").addClass('error');
+        }
+        else {
+            if ($("#input-user").hasClass('validado')) {
+                $("#input-user").removeClass('validado');
+                $("#input-user").addClass('error');
+            }
+        }
+    }
+    else {
+        //revisa el nombre
+        valor = $("#input-user").val();
+        $.ajax({
+            url: './validar_usuario.php',
+            type: 'POST',
+            data: { valor },
+            success: (resp) => {
+                if (resp == 1) {
+                    $('#mensajeUser').append('(nombre de usuario en uso)');
+                    if ($("#input-user").hasClass('form-control')) {
+                        $("#input-user").removeClass('form-control');
+                        $("#input-user").addClass('error');
+                    }
+                    else {
+                        if ($("#input-user").hasClass('validado')) {
+                            $("#input-user").removeClass('validado');
+                            $("#input-user").addClass('error');
+                        }
+                    }
+                }
+                else {
+                    $('#mensajeUser').append('(nombre de usuario disponible)');
+                    if ($("#input-user").hasClass('form-control')) {
+                        $("#input-user").removeClass('form-control');
+                        $("#input-user").addClass('validado');
+                    }
+                    else {
+                        if ($("#input-user").hasClass('error')) {
+                            $("#input-user").removeClass('error');
+                            $("#input-user").addClass('validado');
+                        }
+                    }
+                }
+            },
+            error: () => {
+
+            }
+        })
+    }
+});
+//validaciones
+//empresa no debe estar vacio
+$("#empresa").change(function () {
+    $vacio = false;
+    $("#mensajeEmpresa").empty();
+    if ($("#empresa").val().length < 1) {
+        $vacio = true;
+    }
+    if ($vacio) {
+        $('#mensajeEmpresa').append('(campo obligatorio)');
+        if ($("#empresa").hasClass('form-control')) {
+            $("#empresa").removeClass('form-control');
+            $("#empresa").addClass('error');
+        }
+        else {
+            if ($("#empresa").hasClass('validado')) {
+                $("#empresa").removeClass('validado');
+                $("#empresa").addClass('error');
+            }
+        }
+    }
+    else {
+        if ($("#empresa").hasClass('form-control')) {
+            $("#empresa").removeClass('form-control');
+            $("#empresa").addClass('validado');
+        }
+        else {
+            if ($("#empresa").hasClass('error')) {
+                $("#empresa").removeClass('error');
+                $("#empresa").addClass('validado');
+            }
+        }
+    }
+});
+//telefono debe tener solo numeros y no estar vacio
+//impide colocar algo que no sea numeros
+$('#telefono').on('input', function () {
+    this.value = this.value.replace(/[^0-9]/g, '');
+});
+//revisa que no este vacio
+$("#telefono").change(function () {
+    $numVacio = false;
+    $("#mensajeTel").empty();
+    if ($("#telefono").val().length < 1) {
+        $numVacio = true;
+    }
+    if ($numVacio) {
+        $('#mensajeTel').append('(campo obligatorio)');
+        if ($("#telefono").hasClass('form-control')) {
+            $("#telefono").removeClass('form-control');
+            $("#telefono").addClass('error');
+        }
+        else {
+            if ($("#telefono").hasClass('validado')) {
+                $("#telefono").removeClass('validado');
+                $("#telefono").addClass('error');
+            }
+        }
+    }
+    else {
+        if ($("#telefono").hasClass('form-control')) {
+            $("#telefono").removeClass('form-control');
+            $("#telefono").addClass('validado');
+        }
+        else {
+            if ($("#telefono").hasClass('error')) {
+                $("#telefono").removeClass('error');
+                $("#telefono").addClass('validado');
+            }
+        }
+    }
+});
+//email debe tener forma de email
+$("#email").change(function () {
+    //revisa que no este vacio
+    $emailVacio = false;
+    $("#mensajeEmail").empty();
+    if ($("#email").val().length < 1) {
+        $emailVacio = true;
+    }
+    if ($emailVacio) {
+        $('#mensajeEmail').append('(campo obligatorio)');
+        if ($("#email").hasClass('form-control')) {
+            $("#email").removeClass('form-control');
+            $("#email").addClass('error');
+        }
+        else {
+            if ($("#email").hasClass('validado')) {
+                $("#email").removeClass('validado');
+                $("#email").addClass('error');
+            }
+        }
+    }
+    else {
+        // si no esta vacio se fija en la estructura
+        $forma = true;
+        if ($("#email").val().indexOf('@', 0) == -1 || $("#email").val().indexOf('.', 0) == -1) {
+            $forma = false;
+        }
+        if ($forma == false) {
+            $('#mensajeEmail').append('(email no valido)');
+            if ($("#email").hasClass('form-control')) {
+                $("#email").removeClass('form-control');
+                $("#email").addClass('error');
+            }
+            else {
+                if ($("#email").hasClass('validado')) {
+                    $("#email").removeClass('validado');
+                    $("#email").addClass('error');
+                }
+            }
+        }
+        else {
+            $('#mensajeEmail').append('(email valido)');
+            if ($("#email").hasClass('form-control')) {
+                $("#email").removeClass('form-control');
+                $("#email").addClass('validado');
+            }
+            else {
+                if ($("#email").hasClass('error')) {
+                    $("#email").removeClass('error');
+                    $("#email").addClass('validado');
+                }
+            }
+        }
+    }
+});
+//reset
+$("#reset").click(function () {
+    $("#mensajeEmail").empty();
+    $("#mensajeTel").empty();
+    $("#mensajeEmpresa").empty();
+    $("#mensajeUser").empty();
+    if ($("#email").hasClass('error')) {
+        $("#email").removeClass('error');
+        $("#email").addClass('form-control');
+    }
+    else {
+        if ($("#email").hasClass('validado')) {
+            $("#email").removeClass('validado');
+            $("#email").addClass('form-control');
+        }
+    }
+    if ($("#telefono").hasClass('error')) {
+        $("#telefono").removeClass('error');
+        $("#telefono").addClass('form-control');
+    }
+    else {
+        if ($("#telefono").hasClass('validado')) {
+            $("#telefono").removeClass('validado');
+            $("#telefono").addClass('form-control');
+        }
+    }
+    if ($("#empresa").hasClass('error')) {
+        $("#empresa").removeClass('error');
+        $("#empresa").addClass('form-control');
+    }
+    else {
+        if ($("#empresa").hasClass('validado')) {
+            $("#empresa").removeClass('validado');
+            $("#empresa").addClass('form-control');
+        }
+    }
+    if ($("#input-user").hasClass('error')) {
+        $("#input-user").removeClass('error');
+        $("#input-user").addClass('form-control');
+    }
+    else {
+        if ($("#input-user").hasClass('validado')) {
+            $("#input-user").removeClass('validado');
+            $("#input-user").addClass('form-control');
+        }
+    }
+});
+
+//provincia
+
+
+$("#provincia").keyup(function () {
+    console.log('holanga');
+    $vacioP = false;
+    $("#mensajeProvincia").empty();
+    $("#sugerencias").empty();
+    if ($("#provincia").val().length < 1) {
+        $vacioP = true;
+    }
+    if ($vacioP) {
+        $('#mensajeProvincia').append('(campo obligatorio)');
+        if ($("#provincia").hasClass('form-control')) {
+            $("#provincia").removeClass('form-control');
+            $("#provincia").addClass('error');
+        }
+        else {
+            if ($("#provincia").hasClass('validado')) {
+                $("#provincia").removeClass('validado');
+                $("#provincia").addClass('error');
+            }
+        }
+    }
+    else {
+        valor = $("#provincia").val();
+        $.ajax({
+            url: './sugerencias.php',
+            type: 'POST',
+            data: { valor },
+            success: (resp) => {
+                $("#sugerencias").html(resp);
+                if ($("#provincia").hasClass('error')) {
+                    $("#provincia").removeClass('error');
+                    $("#provincia").addClass('validado');
+                }
+                else {
+                    if ($("#provincia").hasClass('form-control')) {
+                        $("#provincia").removeClass('form-control');
+                        $("#provincia").addClass('validado');
+                    }
+                }
+            },
+            error: () => {
+
+            }
+        })
+    }
+});
+
+$("#enviar").click(function (e) {
+    e.preventDefault();
+    if ($("#input-user").hasClass('validado') && $("#provincia").hasClass('validado') && $("#empresa").hasClass('validado') && $("#telefono").hasClass('validado') && $("#email").hasClass('validado')) {
+        nombre = $("#input-user").val();
+        empresa = $("#empresa").val();
+        tel = $("#telefono").val();
+        email = $("#email").val();
+        provi = $("#provincia").val();
+        comentarios = $("#comentarios").val();
+        $.ajax({
+            url: './ingresarUsuario.php',
+            type: 'POST',
+            data: { nombre, empresa, tel, email, comentarios, provi },
+            success: function (resp) {
+                if (resp) {
+                    $("#resultado").html('<p class="correcto">Se pudo registrar el contacto</p>');
+                }
+                else {
+                    $("#resultado").html('<p class="incorrecto">No se pudo registrar el contacto</p>');
+                }
+            },
+            error: function () {
+
+            }
+        })
+
+    }
+});

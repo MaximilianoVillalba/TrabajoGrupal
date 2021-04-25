@@ -228,3 +228,25 @@ footer {
     background-color: rgb(241, 178, 120);
   }
 }
+
+input[type="text"].validado {
+  border-color: green;
+}
+input[type="text"].error {
+  border-color: red;
+}
+input[type="email"].validado {
+  border-color: green;
+}
+input[type="email"].error {
+  border-color: red;
+}
+label.imputs {
+  display: block;
+}
+.correcto {
+  color: green;
+}
+.incorrecto {
+  color: red;
+}
