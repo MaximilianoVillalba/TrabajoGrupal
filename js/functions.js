@@ -1,5 +1,6 @@
 /* SELECTS */
 $(function () {
+    var imagen_placeholder = $('#img-general').attr('src');
     $.ajax({
         url: './get_provincias.php',
         type: 'POST',
@@ -53,6 +54,7 @@ $(function () {
         })
     }
 
+    
     $.ajax({
         url: "./pagina_listado.php",
         type: "POST",
@@ -81,6 +83,27 @@ $(function () {
             })
         }
     }).then(() => {
+        $('.lista-cerros').mouseenter(function(){
+            idSeleccionado = this.id;
+            $.ajax({
+                url: './info_modal.php',
+                type: 'POST',
+                data: { idSeleccionado },
+                success: function (resp) {
+                    montania = JSON.parse(resp);
+                    console.log(montania[0].imagen);
+                    $("#img-general").attr('src', montania[0].imagen);
+                },
+                error: function () {
+
+                }
+            })
+        })
+
+        $('.lista-cerros').mouseleave(function () { 
+            $("#img-general").attr('src', imagen_placeholder);            
+        });
+
         $(".list-li-desc li").click(function (e) {
             idSeleccionado = e.target.id;
             $.ajax({

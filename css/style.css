@@ -3,6 +3,10 @@ html {
   position: relative;
 }
 
+::-webkit-scrollbar {
+  display: none;
+}
+
 body {
   margin: 0;
   padding: 0;
@@ -12,8 +16,8 @@ body {
   min-height: 100vh;
 }
 
-#main {
-  margin-bottom: 70px;
+.main-margin {
+  margin-bottom: 50px;
 }
 
 /* INDEX */
@@ -209,6 +213,11 @@ body {
   height: 70%;
   width: 80%;
   margin: 1em;
+  overflow: hidden;
+}
+
+#img-general img {
+  object-fit: fill;
 }
 
 .fuente-helvetica {
