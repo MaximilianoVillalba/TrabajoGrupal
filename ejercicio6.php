@@ -84,7 +84,9 @@ include('./head.php');
                 </div>
             </div>
             <div class="col-sm-8 col-md-6 d-flex justify-content-center align-items-center">
-                <img id="img-general" src=./img/trekking_general.jpg alt="">
+                <div id="img-general-contenedor">
+                    <img id="img-general" src=./img/trekking_general.jpg alt="">
+                </div>
             </div>
         </div>
         <div class="row last-row color-last-div">

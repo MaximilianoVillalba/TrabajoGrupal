@@ -188,6 +188,10 @@ body {
   padding: 0px;
 }
 
+.lista-cerros {
+  font-size: large;
+}
+
 .lista-cerros:hover {
   cursor: default;
   font-weight: bold;
@@ -209,11 +213,18 @@ body {
   box-sizing: unset;
 }
 
+#img-general-contenedor {
+  padding-top: 30px;
+  width: 500px;
+  height: 350px;
+}
+
 #img-general {
   height: 70%;
   width: 80%;
   margin: 1em;
   overflow: hidden;
+  transition: all .5s ease-in-out;
 }
 
 #img-general img {

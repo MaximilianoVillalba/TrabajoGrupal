@@ -1,7 +1,7 @@
 <?php include('./head.php') ?>
 
 <body>
-    <div class="container-fluid">
+    <main class="container-fluid main-margin">
         <div class="row pagina3-principal-row">
             <div class="row">
                 <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
@@ -139,6 +139,6 @@
                 </div>
             </div>
         </div>
-    </div>
+</main>
 </body>
 <?php include('./footer.php') ?>
