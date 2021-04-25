@@ -54,7 +54,7 @@ $(function () {
         })
     }
 
-    
+
     $.ajax({
         url: "./pagina_listado.php",
         type: "POST",
@@ -83,7 +83,7 @@ $(function () {
             })
         }
     }).then(() => {
-        $('.lista-cerros').mouseenter(function(){
+        $('.lista-cerros').mouseenter(function () {
             idSeleccionado = this.id;
             $.ajax({
                 url: './info_modal.php',
@@ -100,8 +100,8 @@ $(function () {
             })
         })
 
-        $('.lista-cerros').mouseleave(function () { 
-            $("#img-general").attr('src', imagen_placeholder);            
+        $('.lista-cerros').mouseleave(function () {
+            $("#img-general").attr('src', imagen_placeholder);
         });
 
         $(".list-li-desc li").click(function (e) {
@@ -154,21 +154,6 @@ $("#select_montania").change(function () {
     })
 });
 
-/* $("#input-user").change((e) => {
-    valor = $("#input-user").val();
-    $.ajax({
-        url: './validar_usuario.php',
-        type: 'POST',
-        data: { valor },
-        success: (resp) => {
-            console.log(resp);
-        },
-        error: () => {
-
-        }
-    })
-}) */
-
 $("#formularioUsuario").submit((e) => {
     e.preventDefault();
     console.log('asdasd');
@@ -177,39 +162,61 @@ $("#formularioUsuario").submit((e) => {
 /* Ejercicio paginacion */
 
 $(".boton-paginacion").click((e) => {
+    movimientoPermitido = true;
     paginaDestino = e.target.id; //Para saber que boton clickeo (ANT) O (SIG)
     paginaPresente = e.target.value; //Para saber en que pagina se encuentra
 
-    if (paginaDestino == "sig") {
-        paginaNueva = parseInt(paginaPresente) + 1;
-    } else {
-        paginaNueva = parseInt(paginaPresente) - 1;
-    }
-    paginacion = (parseInt(paginaNueva) - 1) * 5;
     $.ajax({
-        url: "./pagina_listado.php",
-        type: "POST",
-        data: { paginacion },
+        url: "./get_users.php",
         success: (resp) => {
-            $("#tbody-pagina").empty();
             users = JSON.parse(resp);
-            users.forEach(user => {
-                let html = '<tr>\
-                <td>'+ user.nombre_usuario + '</td>\
-                <td>'+ user.empresa + '</td>\
-                <td>'+ user.telefono + '</td>\
-                <td>'+ user.email + '</td>\
-                <td>'+ user.comentario + '</td>\
-                </tr>'
-                $("#tbody-pagina").append(html);
+            return cantidadMaxPaginas = Math.ceil((users.length) / 5);
+        }
+    }).then(() => {
+        if (paginaDestino == "sig") {
+            if (paginaPresente == cantidadMaxPaginas) {
+                movimientoPermitido = false;
+            } else {
+                paginaNueva = parseInt(paginaPresente) + 1;
+            }
+        } else {
+            if (paginaPresente == 1) {
+                movimientoPermitido = false;
+            } else {
+                paginaNueva = parseInt(paginaPresente) - 1;
+            }
+        }
+        paginacion = (parseInt(paginaNueva) - 1) * 5;
+        if (movimientoPermitido) {
+            $.ajax({
+                url: "./pagina_listado.php",
+                type: "POST",
+                data: { paginacion },
+                success: (resp) => {
+                    $("#tbody-pagina").empty();
+                    users = JSON.parse(resp);
+                    users.forEach(user => {
+                        let html = '<tr>\
+                        <td>'+ user.nombre_usuario + '</td>\
+                        <td>'+ user.empresa + '</td>\
+                        <td>'+ user.telefono + '</td>\
+                        <td>'+ user.email + '</td>\
+                        <td>'+ user.comentario + '</td>\
+                        </tr>'
+                        $("#tbody-pagina").append(html);
+                    })
+                    $(".boton-izq").attr("value", paginaNueva);
+                    $(".boton-der").attr("value", paginaNueva);
+                },
+                error: () => {
+
+                }
             })
-            $(".boton-izq").attr("value", paginaNueva);
-            $(".boton-der").attr("value", paginaNueva);
-        },
-        error: () => {
+        } else {
 
         }
     })
+
 })
 
 //revisa el nombre en la base de datos
@@ -397,48 +404,63 @@ $("#email").change(function () {
 });
 //reset
 $("#reset").click(function () {
-    $("#mensajeEmail").empty();
-    $("#inputs-form-tel").empty();
-    $("#inputs-form-empresa").empty();
-    $("#inputs-form-user").empty();
+    $("#email").empty();
+    $("#telefono").empty();
+    $("#empresa").empty();
+    $("#input-user").empty();
+    $("#sugerencias").empty();
+
+    /* Para que los labels vuelvan a sus estado base */
+    $('#inputs-form-user').empty();
+    $('#inputs-form-user').append('Nombre de usuario');
+    $('#inputs-form-empresa').empty();
+    $('#inputs-form-empresa').append('Empresa');
+    $('#inputs-form-tel').empty();
+    $('#inputs-form-tel').append('Telefono (solo numeros)');
+    $('#inputs-form-email').empty();
+    $('#inputs-form-email').append('Email');
+    $('#inputs-form-provincia').empty();
+    $('#inputs-form-provincia').append('Provincia');
+
+
     if ($("#email").hasClass('error')) {
         $("#email").removeClass('error');
-        $("#email").addClass('form-control');
     }
     else {
         if ($("#email").hasClass('validado')) {
             $("#email").removeClass('validado');
-            $("#email").addClass('form-control');
         }
     }
     if ($("#telefono").hasClass('error')) {
         $("#telefono").removeClass('error');
-        $("#telefono").addClass('form-control');
     }
     else {
         if ($("#telefono").hasClass('validado')) {
             $("#telefono").removeClass('validado');
-            $("#telefono").addClass('form-control');
         }
     }
     if ($("#empresa").hasClass('error')) {
         $("#empresa").removeClass('error');
-        $("#empresa").addClass('form-control');
     }
     else {
         if ($("#empresa").hasClass('validado')) {
             $("#empresa").removeClass('validado');
-            $("#empresa").addClass('form-control');
         }
     }
     if ($("#input-user").hasClass('error')) {
         $("#input-user").removeClass('error');
-        $("#input-user").addClass('form-control');
     }
     else {
         if ($("#input-user").hasClass('validado')) {
             $("#input-user").removeClass('validado');
-            $("#input-user").addClass('form-control');
+        }
+    }
+    if ($("#provincia").hasClass('error')) {
+        $("#provincia").removeClass('error');
+    }
+    else {
+        if ($("#provincia").hasClass('validado')) {
+            $("#provincia").removeClass('validado');
         }
     }
 });

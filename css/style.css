@@ -10,14 +10,14 @@ html {
 body {
   margin: 0;
   padding: 0;
-  font-family: 'Advent Pro', sans-serif;
+  font-family: "Advent Pro", sans-serif;
   display: flex;
   flex-direction: column;
   min-height: 100vh;
 }
 
 .main-margin {
-  margin-bottom: 50px;
+  margin-bottom: 34px;
 }
 
 /* INDEX */
@@ -50,7 +50,7 @@ body {
   width: 100%;
   background-color: rgb(55, 55, 55);
   color: blanchedalmond;
-  font-family: 'Advent Pro', sans-serif;
+  font-family: "Advent Pro", sans-serif;
   text-align: center;
 }
 
@@ -60,11 +60,11 @@ body {
 
 .nav-link {
   color: rgb(55, 55, 55);
-  font-family: 'Advent Pro', sans-serif;
+  font-family: "Advent Pro", sans-serif;
   font-weight: 600;
 }
 
-.nav-link :hover{
+.nav-link :hover {
   background-color: rgb(55, 55, 55);
   color: blanchedalmond;
 }
@@ -82,9 +82,9 @@ body {
   width: 100%;
   background-color: rgb(55, 55, 55);
   color: blanchedalmond;
-  font-family: 'Advent Pro', sans-serif;
+  font-family: "Advent Pro", sans-serif;
   font-size: medium;
-  margin-top:auto;
+  margin-top: auto;
 }
 
 #creditIcon {
@@ -92,7 +92,6 @@ body {
   position: absolute;
   bottom: 0;
 }
-
 
 /* ------------------------------------------------------------- */
 
@@ -195,13 +194,13 @@ body {
 .lista-cerros:hover {
   cursor: default;
   font-weight: bold;
-  transition:all .1s ease-in-out;
+  transition: all 0.1s ease-in-out;
 }
 
 .img-lista:hover {
   transform: scale(1.1);
   filter: saturate(150%);
-  transition:all .5s ease-in-out;
+  transition: all 0.5s ease-in-out;
 }
 
 .cont-img img {
@@ -224,7 +223,7 @@ body {
   width: 80%;
   margin: 1em;
   overflow: hidden;
-  transition: all .5s ease-in-out;
+  transition: all 0.5s ease-in-out;
 }
 
 #img-general img {
@@ -355,7 +354,7 @@ label#inputs-form {
 }
 
 #back-formulario {
-  background-image: url("../img/fondo_formulario.jpg");
+  background-image: url("../img/fondo_formulario.png");
   background-repeat: no-repeat;
   background-size: cover;
 }
@@ -365,4 +364,8 @@ label#inputs-form {
 }
 .form-floating > textarea {
   background: transparent;
+}
+
+.form-floating label {
+  font-weight: bold;
 }
