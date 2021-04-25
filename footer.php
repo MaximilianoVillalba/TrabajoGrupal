@@ -1,6 +1,6 @@
 </html>
 <footer class="footer">
-    <nav class="navbar navbar-light bg-light nav-footer">
+    <nav class="navbar navbar-light nav-footer">
         <div id="footer-div">
             <div class="row">
                 <div class="col-lg-1 col-md-2 col-sm-3 col-xs-4">
