@@ -241,7 +241,7 @@ input[type="email"].validado {
 input[type="email"].error {
   border-color: red;
 }
-label.imputs {
+label#inputs-form {
   display: block;
 }
 .correcto {
@@ -253,4 +253,17 @@ label.imputs {
 }
 .table {
   table-layout: fixed;
+}
+
+#back-formulario {
+  background-image: url("../img/fondo_formulario.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.form-floating > input {
+  background: transparent;
+}
+.form-floating > textarea {
+  background: transparent;
 }

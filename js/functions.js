@@ -125,7 +125,7 @@ $("#select_montania").change(function () {
     })
 });
 
-$("#input-user").change((e) => {
+/* $("#input-user").change((e) => {
     valor = $("#input-user").val();
     $.ajax({
         url: './validar_usuario.php',
@@ -138,7 +138,7 @@ $("#input-user").change((e) => {
 
         }
     })
-})
+}) */
 
 $("#formularioUsuario").submit((e) => {
     e.preventDefault();
@@ -187,14 +187,13 @@ $(".boton-paginacion").click((e) => {
 $("#input-user").change(function () {
     //revisa que no este vacio
     $vacio = false;
-    $("#mensajeUser").empty();
+    $("#inputs-form-user").empty();
     if ($("#input-user").val().length < 1) {
         $vacio = true;
     }
     if ($vacio) {
-        $('#mensajeUser').append('(campo obligatorio)');
+        $('#inputs-form-user').append('(campo obligatorio)');
         if ($("#input-user").hasClass('form-control')) {
-            $("#input-user").removeClass('form-control');
             $("#input-user").addClass('error');
         }
         else {
@@ -213,9 +212,8 @@ $("#input-user").change(function () {
             data: { valor },
             success: (resp) => {
                 if (resp == 1) {
-                    $('#mensajeUser').append('(nombre de usuario en uso)');
+                    $('#inputs-form-user').append('(nombre de usuario en uso)');
                     if ($("#input-user").hasClass('form-control')) {
-                        $("#input-user").removeClass('form-control');
                         $("#input-user").addClass('error');
                     }
                     else {
@@ -226,9 +224,9 @@ $("#input-user").change(function () {
                     }
                 }
                 else {
-                    $('#mensajeUser').append('(nombre de usuario disponible)');
+                    $('#inputs-form-user').append('(nombre de usuario disponible)');
                     if ($("#input-user").hasClass('form-control')) {
-                        $("#input-user").removeClass('form-control');
+                        $("#input-user").removeClass('error');
                         $("#input-user").addClass('validado');
                     }
                     else {
@@ -249,14 +247,13 @@ $("#input-user").change(function () {
 //empresa no debe estar vacio
 $("#empresa").change(function () {
     $vacio = false;
-    $("#mensajeEmpresa").empty();
+    $("#inputs-form-empresa").empty();
     if ($("#empresa").val().length < 1) {
         $vacio = true;
     }
     if ($vacio) {
-        $('#mensajeEmpresa').append('(campo obligatorio)');
+        $('#inputs-form-empresa').append('(campo obligatorio)');
         if ($("#empresa").hasClass('form-control')) {
-            $("#empresa").removeClass('form-control');
             $("#empresa").addClass('error');
         }
         else {
@@ -268,8 +265,8 @@ $("#empresa").change(function () {
     }
     else {
         if ($("#empresa").hasClass('form-control')) {
-            $("#empresa").removeClass('form-control');
             $("#empresa").addClass('validado');
+            $("#empresa").removeClass('error');
         }
         else {
             if ($("#empresa").hasClass('error')) {
@@ -287,14 +284,13 @@ $('#telefono').on('input', function () {
 //revisa que no este vacio
 $("#telefono").change(function () {
     $numVacio = false;
-    $("#mensajeTel").empty();
+    $("#inputs-form-tel").empty();
     if ($("#telefono").val().length < 1) {
         $numVacio = true;
     }
     if ($numVacio) {
-        $('#mensajeTel').append('(campo obligatorio)');
+        $('#inputs-form-tel').append('(campo obligatorio)');
         if ($("#telefono").hasClass('form-control')) {
-            $("#telefono").removeClass('form-control');
             $("#telefono").addClass('error');
         }
         else {
@@ -306,8 +302,8 @@ $("#telefono").change(function () {
     }
     else {
         if ($("#telefono").hasClass('form-control')) {
-            $("#telefono").removeClass('form-control');
             $("#telefono").addClass('validado');
+            $("#telefono").removeClass('error');
         }
         else {
             if ($("#telefono").hasClass('error')) {
@@ -321,14 +317,13 @@ $("#telefono").change(function () {
 $("#email").change(function () {
     //revisa que no este vacio
     $emailVacio = false;
-    $("#mensajeEmail").empty();
+    $("#inputs-form-email").empty();
     if ($("#email").val().length < 1) {
         $emailVacio = true;
     }
     if ($emailVacio) {
-        $('#mensajeEmail').append('(campo obligatorio)');
+        $('#inputs-form-email').append('(campo obligatorio)');
         if ($("#email").hasClass('form-control')) {
-            $("#email").removeClass('form-control');
             $("#email").addClass('error');
         }
         else {
@@ -345,9 +340,8 @@ $("#email").change(function () {
             $forma = false;
         }
         if ($forma == false) {
-            $('#mensajeEmail').append('(email no valido)');
+            $('#inputs-form-email').append('(email no valido)');
             if ($("#email").hasClass('form-control')) {
-                $("#email").removeClass('form-control');
                 $("#email").addClass('error');
             }
             else {
@@ -358,10 +352,10 @@ $("#email").change(function () {
             }
         }
         else {
-            $('#mensajeEmail').append('(email valido)');
+            $('#inputs-form-email').append('(email valido)');
             if ($("#email").hasClass('form-control')) {
-                $("#email").removeClass('form-control');
                 $("#email").addClass('validado');
+                $("#email").removeClass('error');
             }
             else {
                 if ($("#email").hasClass('error')) {
@@ -375,9 +369,9 @@ $("#email").change(function () {
 //reset
 $("#reset").click(function () {
     $("#mensajeEmail").empty();
-    $("#mensajeTel").empty();
-    $("#mensajeEmpresa").empty();
-    $("#mensajeUser").empty();
+    $("#inputs-form-tel").empty();
+    $("#inputs-form-empresa").empty();
+    $("#inputs-form-user").empty();
     if ($("#email").hasClass('error')) {
         $("#email").removeClass('error');
         $("#email").addClass('form-control');
@@ -426,15 +420,14 @@ $("#reset").click(function () {
 $("#provincia").keyup(function () {
     console.log('holanga');
     $vacioP = false;
-    $("#mensajeProvincia").empty();
+    $("#inputs-form-provincia").empty();
     $("#sugerencias").empty();
     if ($("#provincia").val().length < 1) {
         $vacioP = true;
     }
     if ($vacioP) {
-        $('#mensajeProvincia').append('(campo obligatorio)');
+        $('#inputs-form-provincia').append('(campo obligatorio)');
         if ($("#provincia").hasClass('form-control')) {
-            $("#provincia").removeClass('form-control');
             $("#provincia").addClass('error');
         }
         else {
@@ -458,7 +451,6 @@ $("#provincia").keyup(function () {
                 }
                 else {
                     if ($("#provincia").hasClass('form-control')) {
-                        $("#provincia").removeClass('form-control');
                         $("#provincia").addClass('validado');
                     }
                 }
