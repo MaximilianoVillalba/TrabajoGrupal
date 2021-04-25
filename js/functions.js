@@ -70,7 +70,7 @@ $(function () {
         success: (resp) => {
             montanias = JSON.parse(resp);
             montanias.forEach((elem) => {
-                $(".list-li-desc").append('<li id="' + elem.id + '">' + elem.nombre + '</li>');
+                $(".list-li-desc").append('<li class="lista-cerros" id="' + elem.id + '">' + elem.nombre + '</li>');
             })
         }
     }).then(() => {
