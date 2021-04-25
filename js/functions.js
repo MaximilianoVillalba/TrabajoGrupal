@@ -20,9 +20,8 @@ $(function () {
         success: (resp) => {
             tabs = JSON.parse(resp);
             tabs.forEach(element => {
-                $("#tabs-dinamicos").append('<li class="nav-item"><button class="nav-link" id="' +
-                    element.id + '" data-bs-toggle="pill" data-bs-target="#pills-' +
-                    element.id + '" type="button" role="tab" aria-selected="true"> ' + element.nombre + '</button></li>');
+                $("#tabs-dinamicos").append('<button class"test" id="' +
+                    element.id + '"> ' + element.nombre + '</button>');
             })
         }
     }).then(() => {

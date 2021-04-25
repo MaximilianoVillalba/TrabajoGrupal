@@ -22,6 +22,7 @@ body {
   height: 35em;
   width: 100%;
   border-radius: 1em;
+  object-fit: cover;
 }
 .row-index {
   border: 3px solid rgb(235, 215, 215);
