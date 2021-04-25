@@ -1,9 +1,5 @@
 <?php
-require('./conexion.php');
 include('./head.php');
-
-$listado = $mysqli->query("SELECT * FROM usuario");
-
 ?>
 
 <body>
@@ -23,10 +19,12 @@ $listado = $mysqli->query("SELECT * FROM usuario");
 
                 </tbody>
             </table>
-            <button type="button" class="btn btn-primary boton-paginacion boton-izq" id="ant"
-                value="1">Anterior</button>
-            <button type="button" class="btn btn-primary boton-paginacion boton-der" id="sig"
-                value="1">Siguiente</button>
+            <div class="d-md-block col-3 mx-auto">
+                <button type="button" class="btn btn-primary boton-paginacion boton-izq" id="ant"
+                    value="1">Anterior</button>
+                <button type="button" class="btn btn-primary boton-paginacion boton-der" id="sig"
+                    value="1">Siguiente</button>
+            </div>
         </div>
     </div>
 </body>

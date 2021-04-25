@@ -249,4 +249,8 @@ label.imputs {
 }
 .incorrecto {
   color: red;
+  /* Ejercicio Listado */
+}
+.table {
+  table-layout: fixed;
 }

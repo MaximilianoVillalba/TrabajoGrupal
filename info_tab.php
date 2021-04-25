@@ -7,7 +7,7 @@ $montania = $mysqli->query("SELECT * FROM montania WHERE id='$id'");
 $resp = '';
 
 while ($rowMontania = $montania->fetch_assoc()) {
-    $resp .= '<div class="tab-pane active">
+    $resp .= '<div class="tab-pane active" id="tab-seleccionado">
     <div class="tab-pane">
         <div class="row">
             <div class="col-lg-6">
