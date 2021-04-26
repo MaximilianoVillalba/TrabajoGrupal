@@ -222,6 +222,7 @@ body {
   height: 70%;
   width: 80%;
   margin: 1em;
+  border-radius: 1em;
   overflow: hidden;
   transition: all 0.5s ease-in-out;
 }
@@ -368,4 +369,21 @@ label#inputs-form {
 
 .form-floating label {
   font-weight: bold;
+}
+
+/*
+  SELECTS
+*/
+#info {
+  width: 80%;
+  margin-left: 10%;
+  margin-right: 10%;
+  margin-top: 1em;
+}
+
+#placeholder-img-select {
+  margin-left: 25%;
+  width: 50%;
+  height: 50%;
+  border-radius: 2em;
 }
