@@ -20,6 +20,7 @@ include('./head.php');
                 </div>
             </div>
             <div class="row" id="info">
+                <img src="img/trip-plan.jpg" id="placeholder-img-select">
             </div>
     </main>
 </body>
