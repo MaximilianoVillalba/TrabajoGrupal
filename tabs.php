@@ -11,6 +11,21 @@ include('./head.php');
                 </div>
             </div>
             <div class="tab-content" id="contenido-tab">
+                <div class="tab-pane active" id="tab-seleccionado">
+                    <div class="tab-pane">
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="card">
+                                    <img src="" class="card-img-top" alt="..." id="img-tab">
+                                </div>
+                            </div>
+                            <div class="col col-lg-6 centrado" id="pagina2-card-body">
+                                <h5></h5>
+                                <p></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

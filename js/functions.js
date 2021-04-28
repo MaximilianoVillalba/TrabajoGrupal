@@ -46,7 +46,11 @@ $(function () {
             type: 'POST',
             data: { idSeleccionado },
             success: function (resp) {
-                $("#contenido-tab").html(resp);
+                montania = JSON.parse(resp);
+                console.log(montania);
+                $("#img-tab").attr('src', montania[0].imagen);
+                $("#pagina2-card-body h5").html(montania[0].nombre);
+                $("#pagina2-card-body p").html(montania[0].descripcion);
             },
             error: function () {
                 console.log('errror');
@@ -91,7 +95,6 @@ $(function () {
                 data: { idSeleccionado },
                 success: function (resp) {
                     montania = JSON.parse(resp);
-                    console.log(montania[0].imagen);
                     $("#img-general").attr('src', montania[0].imagen);
                 },
                 error: function () {
@@ -131,7 +134,13 @@ $("#select_province").change(function () {
         type: 'POST',
         data: { valor },
         success: function (resp) {
-            $("#select_montania").html(resp);
+            montanias = JSON.parse(resp);
+            $("#select_montania").empty();
+            $("#select_montania").append('<option disabled selected>Seleccione una opción</option>');
+            montanias.forEach((mont) => {
+                console.log(mont);
+                $("#select_montania").append('<option value="' + mont.id + '">' + mont.nombre + '</option>')
+            })
         },
         error: function () {
             console.log('errror');
