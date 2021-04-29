@@ -1,4 +1,5 @@
 /* SELECTS */
+const limiteUsuarios = 5;
 $(function () {
     var imagen_placeholder = $('#img-general').attr('src');
     $.ajax({
@@ -173,13 +174,12 @@ $("#formularioUsuario").submit((e) => {
 $(".boton-paginacion").click((e) => {
     movimientoPermitido = true;
     paginaDestino = e.target.id; //Para saber que boton clickeo (ANT) O (SIG)
-    paginaPresente = e.target.value; //Para saber en que pagina se encuentra
+    paginaPresente = $("#paginaActual").val(); //Para saber en que pagina se encuentra
 
     $.ajax({
         url: "./get_users.php",
         success: (resp) => {
-            users = JSON.parse(resp);
-            return cantidadMaxPaginas = Math.ceil((users.length) / 5);
+            return cantidadMaxPaginas = Math.ceil(resp / limiteUsuarios);
         }
     }).then(() => {
         if (paginaDestino == "sig") {
@@ -214,8 +214,9 @@ $(".boton-paginacion").click((e) => {
                         </tr>'
                         $("#tbody-pagina").append(html);
                     })
-                    $(".boton-izq").attr("value", paginaNueva);
-                    $(".boton-der").attr("value", paginaNueva);
+                    /* $("#paginaActual").html('<button type="button" class="btn btn-secondary" id="paginaActual" value="' + paginaNueva + '" disabled>' + paginaNueva + '</button>') */
+                    $("#paginaActual").attr("value", paginaNueva);
+                    $("#paginaActual").html(paginaNueva);
                 },
                 error: () => {
 

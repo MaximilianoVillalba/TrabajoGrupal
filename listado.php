@@ -20,8 +20,9 @@ include('./head.php');
                 </tbody>
             </table>
             <div class="d-md-block col-3 mx-auto">
-                <button type="button" class="btn btn-primary boton-paginacion boton-izq" id="ant" value="1">Anterior</button>
-                <button type="button" class="btn btn-primary boton-paginacion boton-der" id="sig" value="1">Siguiente</button>
+                <button type="button" class="btn btn-primary boton-paginacion boton-izq" id="ant">Anterior</button>
+                <button type="button" class="btn btn-secondary" id="paginaActual" value="1" disabled>1</button>
+                <button type="button" class="btn btn-primary boton-paginacion boton-der" id="sig">Siguiente</button>
             </div>
         </div>
     </main>
