@@ -183,16 +183,24 @@ $(".boton-paginacion").click((e) => {
         }
     }).then(() => {
         if (paginaDestino == "sig") {
+            $("#ant").prop("disabled", false); //Con esto habilito el otro boton cuando llega al maximo de su pagina, ya que avanzo de pagina al no poder retroceder
             if (paginaPresente == cantidadMaxPaginas) {
                 movimientoPermitido = false;
             } else {
                 paginaNueva = parseInt(paginaPresente) + 1;
+                if (paginaPresente == cantidadMaxPaginas - 1) { //Con esto me fijo si la siguiente pagina que mostrar es el limite, pongo a ese boton en disabled
+                    $("#" + paginaDestino).prop("disabled", true);
+                }
             }
         } else {
+            $("#sig").prop("disabled", false); //Con esto habilito el otro boton cuando llega al maximo de su pagina
             if (paginaPresente == 1) {
                 movimientoPermitido = false;
             } else {
                 paginaNueva = parseInt(paginaPresente) - 1;
+                if (paginaPresente == 2) { //Con esto me fijo si la siguiente pagina que mostrar es el limite, pongo a ese boton en disabled, ya que retrocedio de pagina al no poder avanzar
+                    $("#" + paginaDestino).prop("disabled", true);
+                }
             }
         }
         paginacion = (parseInt(paginaNueva) - 1) * 5;
