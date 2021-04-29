@@ -1,4 +1,5 @@
 /* SELECTS */
+const limiteUsuarios = 5;
 $(function () {
     var imagen_placeholder = $('#img-general').attr('src');
     $.ajax({
@@ -46,7 +47,11 @@ $(function () {
             type: 'POST',
             data: { idSeleccionado },
             success: function (resp) {
-                $("#contenido-tab").html(resp);
+                montania = JSON.parse(resp);
+                console.log(montania);
+                $("#img-tab").attr('src', montania[0].imagen);
+                $("#pagina2-card-body h5").html(montania[0].nombre);
+                $("#pagina2-card-body p").html(montania[0].descripcion);
             },
             error: function () {
                 console.log('errror');
@@ -91,7 +96,6 @@ $(function () {
                 data: { idSeleccionado },
                 success: function (resp) {
                     montania = JSON.parse(resp);
-                    console.log(montania[0].imagen);
                     $("#img-general").attr('src', montania[0].imagen);
                 },
                 error: function () {
@@ -131,7 +135,13 @@ $("#select_province").change(function () {
         type: 'POST',
         data: { valor },
         success: function (resp) {
-            $("#select_montania").html(resp);
+            montanias = JSON.parse(resp);
+            $("#select_montania").empty();
+            $("#select_montania").append('<option disabled selected>Seleccione una opción</option>');
+            montanias.forEach((mont) => {
+                console.log(mont);
+                $("#select_montania").append('<option value="' + mont.id + '">' + mont.nombre + '</option>')
+            })
         },
         error: function () {
             console.log('errror');
@@ -164,26 +174,33 @@ $("#formularioUsuario").submit((e) => {
 $(".boton-paginacion").click((e) => {
     movimientoPermitido = true;
     paginaDestino = e.target.id; //Para saber que boton clickeo (ANT) O (SIG)
-    paginaPresente = e.target.value; //Para saber en que pagina se encuentra
+    paginaPresente = $("#paginaActual").val(); //Para saber en que pagina se encuentra
 
     $.ajax({
         url: "./get_users.php",
         success: (resp) => {
-            users = JSON.parse(resp);
-            return cantidadMaxPaginas = Math.ceil((users.length) / 5);
+            return cantidadMaxPaginas = Math.ceil(resp / limiteUsuarios);
         }
     }).then(() => {
         if (paginaDestino == "sig") {
+            $("#ant").prop("disabled", false); //Con esto habilito el otro boton cuando llega al maximo de su pagina, ya que avanzo de pagina al no poder retroceder
             if (paginaPresente == cantidadMaxPaginas) {
                 movimientoPermitido = false;
             } else {
                 paginaNueva = parseInt(paginaPresente) + 1;
+                if (paginaPresente == cantidadMaxPaginas - 1) { //Con esto me fijo si la siguiente pagina que mostrar es el limite, pongo a ese boton en disabled
+                    $("#" + paginaDestino).prop("disabled", true);
+                }
             }
         } else {
+            $("#sig").prop("disabled", false); //Con esto habilito el otro boton cuando llega al maximo de su pagina
             if (paginaPresente == 1) {
                 movimientoPermitido = false;
             } else {
                 paginaNueva = parseInt(paginaPresente) - 1;
+                if (paginaPresente == 2) { //Con esto me fijo si la siguiente pagina que mostrar es el limite, pongo a ese boton en disabled, ya que retrocedio de pagina al no poder avanzar
+                    $("#" + paginaDestino).prop("disabled", true);
+                }
             }
         }
         paginacion = (parseInt(paginaNueva) - 1) * 5;
@@ -205,8 +222,9 @@ $(".boton-paginacion").click((e) => {
                         </tr>'
                         $("#tbody-pagina").append(html);
                     })
-                    $(".boton-izq").attr("value", paginaNueva);
-                    $(".boton-der").attr("value", paginaNueva);
+                    /* $("#paginaActual").html('<button type="button" class="btn btn-secondary" id="paginaActual" value="' + paginaNueva + '" disabled>' + paginaNueva + '</button>') */
+                    $("#paginaActual").attr("value", paginaNueva);
+                    $("#paginaActual").html(paginaNueva);
                 },
                 error: () => {
 

@@ -1,8 +1,7 @@
 <?php
 require('./conexion.php');
 
-$listado = $mysqli->query("SELECT * FROM usuario");
+$listado = $mysqli->query("SELECT COUNT(nombre_usuario) as cantidad FROM usuario");
+$cant = $listado->fetch_assoc()['cantidad'];
 
-$array = $listado->fetch_all(MYSQLI_ASSOC);
-$resp = json_encode($array);
-echo $resp;
+echo $cant;
