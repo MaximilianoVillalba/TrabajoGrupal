@@ -48,7 +48,6 @@ $(function () {
             data: { idSeleccionado },
             success: function (resp) {
                 montania = JSON.parse(resp);
-                console.log(montania);
                 $("#img-tab").attr('src', montania[0].imagen);
                 $("#pagina2-card-body h5").html(montania[0].nombre);
                 $("#pagina2-card-body p").html(montania[0].descripcion);
@@ -97,6 +96,7 @@ $(function () {
                 success: function (resp) {
                     montania = JSON.parse(resp);
                     $("#img-general").attr('src', montania[0].imagen);
+                    $("#img-general").addClass('modal-on');
                 },
                 error: function () {
 
@@ -105,7 +105,13 @@ $(function () {
         })
 
         $('.lista-cerros').mouseleave(function () {
-            $("#img-general").attr('src', imagen_placeholder);
+            if ($("#img-general").hasClass('modal-on') != false) {
+                console.log('entraaa');
+                $("#img-general").attr('src', imagen_placeholder);
+                $("#img-general").removeClass('modal-on');
+            } else {
+                console.log('entra al else');
+            }
         });
 
         $(".list-li-desc li").click(function (e) {
