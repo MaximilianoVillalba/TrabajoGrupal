@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 22-04-2021 a las 05:16:24
+-- Tiempo de generación: 30-04-2021 a las 02:02:03
 -- Versión del servidor: 10.4.13-MariaDB
 -- Versión de PHP: 7.4.8
 
@@ -81,31 +81,33 @@ CREATE TABLE `usuario` (
   `empresa` varchar(100) NOT NULL,
   `telefono` int(11) NOT NULL,
   `email` varchar(150) NOT NULL,
-  `comentario` text NOT NULL
+  `comentario` text NOT NULL,
+  `provincia` varchar(150) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `usuario`
 --
 
-INSERT INTO `usuario` (`nombre_usuario`, `empresa`, `telefono`, `email`, `comentario`) VALUES
-('maxi', 'Eventbrite', 29940476, 'maximiliano@gmail.com', 'Ninguno'),
-('Maxi1', 'Empresa1', 2944004, 'maxi@maxi1', 'ninguno'),
-('Maxi10', 'Empresa1', 2944004, 'maxi@maxi1', 'ninguno'),
-('Maxi11', 'Empresa1', 2944004, 'maxi@maxi1', 'ninguno'),
-('Maxi12', 'Empresa1', 2944004, 'maxi@maxi1', 'ninguno'),
-('Maxi13', 'Empresa1', 2944004, 'maxi@maxi1', 'ninguno'),
-('Maxi14', 'Empresa1', 2944004, 'maxi@maxi1', 'ninguno'),
-('Maxi15', 'Empresa1', 2944004, 'maxi@maxi1', 'ninguno'),
-('Maxi16', 'Empresa1', 2944004, 'maxi@maxi1', 'ninguno'),
-('Maxi2', 'Empresa1', 2944004, 'maxi@maxi1', 'ninguno'),
-('Maxi3', 'Empresa1', 2944004, 'maxi@maxi1', 'ninguno'),
-('Maxi4', 'Empresa1', 2944004, 'maxi@maxi1', 'ninguno'),
-('Maxi5', 'Empresa1', 2944004, 'maxi@maxi1', 'ninguno'),
-('Maxi6', 'Empresa1', 2944004, 'maxi@maxi1', 'ninguno'),
-('Maxi7', 'Empresa1', 2944004, 'maxi@maxi1', 'ninguno'),
-('Maxi8', 'Empresa1', 2944004, 'maxi@maxi1', 'ninguno'),
-('Maxi9', 'Empresa1', 2944004, 'maxi@maxi1', 'ninguno');
+INSERT INTO `usuario` (`nombre_usuario`, `empresa`, `telefono`, `email`, `comentario`, `provincia`) VALUES
+('maxi', 'Eventbrite', 29940476, 'maximiliano@gmail.com', 'Ninguno', ''),
+('Maxi1', 'Empresa1', 2944004, 'maxi@maxi1', 'ninguno', ''),
+('Maxi10', 'Empresa1', 2944004, 'maxi@maxi1', 'ninguno', ''),
+('Maxi11', 'Empresa1', 2944004, 'maxi@maxi1', 'ninguno', ''),
+('Maxi12', 'Empresa1', 2944004, 'maxi@maxi1', 'ninguno', ''),
+('Maxi13', 'Empresa1', 2944004, 'maxi@maxi1', 'ninguno', ''),
+('Maxi14', 'Empresa1', 2944004, 'maxi@maxi1', 'ninguno', ''),
+('Maxi15', 'Empresa1', 2944004, 'maxi@maxi1', 'ninguno', ''),
+('Maxi16', 'Empresa1', 2944004, 'maxi@maxi1', 'ninguno', ''),
+('Maxi2', 'Empresa1', 2944004, 'maxi@maxi1', 'ninguno', ''),
+('Maxi3', 'Empresa1', 2944004, 'maxi@maxi1', 'ninguno', ''),
+('Maxi4', 'Empresa1', 2944004, 'maxi@maxi1', 'ninguno', ''),
+('Maxi5', 'Empresa1', 2944004, 'maxi@maxi1', 'ninguno', ''),
+('Maxi6', 'Empresa1', 2944004, 'maxi@maxi1', 'ninguno', ''),
+('Maxi7', 'Empresa1', 2944004, 'maxi@maxi1', 'ninguno', ''),
+('Maxi8', 'Empresa1', 2944004, 'maxi@maxi1', 'ninguno', ''),
+('Maxi9', 'Empresa1', 2944004, 'maxi@maxi1', 'ninguno', ''),
+('maxiiii05', 'Eventbrite2', 2147483647, 'maximiliano.villalba@est.fi.uncoma.edu.ar', 'ddd', 'Neuquen');
 
 --
 -- Índices para tablas volcadas
@@ -115,7 +117,8 @@ INSERT INTO `usuario` (`nombre_usuario`, `empresa`, `telefono`, `email`, `coment
 -- Indices de la tabla `montania`
 --
 ALTER TABLE `montania`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `id_provincia` (`id_provincia`);
 
 --
 -- Indices de la tabla `provincia`
@@ -144,6 +147,16 @@ ALTER TABLE `montania`
 --
 ALTER TABLE `provincia`
   MODIFY `id_provincia` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- Restricciones para tablas volcadas
+--
+
+--
+-- Filtros para la tabla `montania`
+--
+ALTER TABLE `montania`
+  ADD CONSTRAINT `montania_ibfk_1` FOREIGN KEY (`id_provincia`) REFERENCES `provincia` (`id_provincia`) ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
